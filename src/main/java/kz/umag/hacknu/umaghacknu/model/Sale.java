@@ -25,11 +25,11 @@ public class Sale {
     @Column(name = "sale_time")
     public Date saleTime;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -3,5 +3,5 @@ package kz.umag.hacknu.umaghacknu.dto;
 import java.io.Serializable;
 
 public class SaleCreateResponse implements Serializable {
-    public Integer id;
+    public Long id;
 }
