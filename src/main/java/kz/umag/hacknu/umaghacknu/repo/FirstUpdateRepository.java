@@ -1,6 +1,9 @@
 package kz.umag.hacknu.umaghacknu.repo;
 
+import kz.umag.hacknu.umaghacknu.model.FirstUpdate;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface FirstUpdateRepository extends JpaRepository<FirstUpdateRepository, Integer> {
+@Repository
+public interface FirstUpdateRepository extends JpaRepository<FirstUpdate, Integer> {
 }

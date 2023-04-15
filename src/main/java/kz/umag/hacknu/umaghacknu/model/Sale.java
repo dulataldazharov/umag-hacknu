@@ -14,7 +14,7 @@ public class Sale {
     public Integer id;
 
     @Column(name = "barcode")
-    public Integer barcode;
+    public Long barcode;
 
     @Column(name = "price")
     public Integer price;
@@ -22,7 +22,7 @@ public class Sale {
     @Column(name = "quantity")
     public Integer quantity;
 
-    @Column(name = "supply_time")
+    @Column(name = "sale_time")
     public Date saleTime;
 
     @Column(name = "supply_id")
