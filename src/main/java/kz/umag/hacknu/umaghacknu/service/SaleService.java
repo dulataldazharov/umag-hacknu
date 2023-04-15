@@ -9,6 +9,4 @@ public class SaleService {
 
     @Autowired
     public SaleRepository saleRepository;
-
-
 }
