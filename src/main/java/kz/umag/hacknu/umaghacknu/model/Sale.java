@@ -11,7 +11,7 @@ public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public Integer id;
+    public Long id;
 
     @Column(name = "barcode")
     public Long barcode;

@@ -10,7 +10,7 @@ public class FirstUpdate {
 
     @Id
     @Column(name = "barcode")
-    public Integer barcode;
+    public Long barcode;
 
     @Column(name = "time")
     public Date time;
