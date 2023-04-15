@@ -14,15 +14,21 @@ public class SupplyService {
     @Autowired
     public SupplyRepository supplyRepository;
 
+    @Autowired
+    public FirstUpdateService firstUpdateService;
+
     public List<Supply> get(Long barcode, Date fromTime, Date toTime) {
         return supplyRepository.get(barcode, fromTime, toTime);
     }
 
     public Supply save(Supply supply) {
+        firstUpdateService.updateTime(supply.barcode, supply.supplyTime);
         return supplyRepository.save(supply);
     }
 
     public void delete(Long id) {
+        Supply supply = supplyRepository.findById(id).get();
+        firstUpdateService.updateTime(supply.barcode, supply.supplyTime);
         supplyRepository.deleteById(id);
     }
 }
