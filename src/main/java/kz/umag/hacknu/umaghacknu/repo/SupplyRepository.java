@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface SupplyRepository extends JpaRepository<Supply, Long> {
-    @Query(value = "SELECT * FROM SUPPLY s " +
+    @Query(value = "SELECT * FROM supply s " +
             "WHERE (?1 IS NULL OR s.barcode = ?1) AND " +
             "   ?2 <= s.supply_time AND ?3 >= s.supply_time",
             nativeQuery = true)
@@ -19,6 +19,6 @@ public interface SupplyRepository extends JpaRepository<Supply, Long> {
 
     List<Supply> findAllByBarcodeOrderBySupplyTime(Long barcode);
 
-    @Query(nativeQuery = true, value = "SELECT s FROM Supply s WHERE s.barcode = ?1 AND s.supplyTime >= ?2 ORDER BY s.supplyTime")
+    @Query(nativeQuery = true, value = "SELECT s FROM supply s WHERE s.barcode = ?1 AND s.supplyTime >= ?2 ORDER BY s.supplyTime")
     List<Supply> findAllFromTime(Long barcode, Date fromTime);
 }

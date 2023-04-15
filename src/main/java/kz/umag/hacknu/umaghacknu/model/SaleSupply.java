@@ -9,7 +9,6 @@ import java.util.Date;
 public class SaleSupply {
 
     @Id
-    @GeneratedValue
     @Column(name = "sale_id")
     public Long saleId;
 
