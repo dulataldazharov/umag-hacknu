@@ -9,7 +9,7 @@ import java.util.Date;
 public class Sale {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public Integer id;
 
@@ -24,4 +24,44 @@ public class Sale {
 
     @Column(name = "sale_time")
     public Date saleTime;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Long getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(Long barcode) {
+        this.barcode = barcode;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Date getSaleTime() {
+        return saleTime;
+    }
+
+    public void setSaleTime(Date saleTime) {
+        this.saleTime = saleTime;
+    }
 }

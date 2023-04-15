@@ -19,4 +19,7 @@ public class SaleService {
         return saleRepository.get(barcode, fromTime, toTime);
     }
 
+    public Sale create(Sale sale) {
+        return saleRepository.save(sale);
+    }
 }
