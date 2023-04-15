@@ -44,10 +44,26 @@ public class SupplyController {
         supply.setPrice(supplyCreateDto.price);
         supply.setQuantity(supplyCreateDto.quantity);
         supply.setSupplyTime(formatter.parse(supplyCreateDto.supplyTime));
-        supply = supplyService.create(supply);
+        supply = supplyService.save(supply);
 
         SupplyCreateResponse response = new SupplyCreateResponse();
         response.id = supply.id;
         return response;
+    }
+
+    @PutMapping(path = "api/supplies/{id}")
+    public @ResponseBody SupplyCreateDto update(
+            @PathVariable Long id,
+            @RequestBody SupplyCreateDto supplyCreateDto
+    ) throws ParseException {
+        Supply supply = new Supply();
+        supply.setId(id);
+        supply.setBarcode(supplyCreateDto.barcode);
+        supply.setPrice(supplyCreateDto.price);
+        supply.setQuantity(supplyCreateDto.quantity);
+        supply.setSupplyTime(formatter.parse(supplyCreateDto.supplyTime));
+        supply = supplyService.save(supply);
+
+        return supplyCreateDto;
     }
 }

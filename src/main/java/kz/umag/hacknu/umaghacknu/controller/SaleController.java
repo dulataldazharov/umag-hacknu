@@ -2,7 +2,7 @@ package kz.umag.hacknu.umaghacknu.controller;
 
 import kz.umag.hacknu.umaghacknu.dto.SaleCreateDto;
 import kz.umag.hacknu.umaghacknu.dto.SaleCreateResponse;
-import kz.umag.hacknu.umaghacknu.dto.SupplyCreateResponse;
+import kz.umag.hacknu.umaghacknu.dto.SupplyCreateDto;
 import kz.umag.hacknu.umaghacknu.model.Sale;
 import kz.umag.hacknu.umaghacknu.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +41,27 @@ public class SaleController {
         sale.setPrice(saleCreateDto.price);
         sale.setQuantity(saleCreateDto.quantity);
         sale.setSaleTime(formatter.parse(saleCreateDto.saleTime));
-        sale = saleService.create(sale);
+        sale = saleService.save(sale);
 
         SaleCreateResponse response = new SaleCreateResponse();
         response.id = sale.id;
         return response;
     }
+
+    @PutMapping(path = "api/sales/{id}")
+    public @ResponseBody SaleCreateDto update(
+            @PathVariable Long id,
+            @RequestBody SaleCreateDto saleCreateDto
+    ) throws ParseException {
+        Sale sale = new Sale();
+        sale.setId(id);
+        sale.setBarcode(saleCreateDto.barcode);
+        sale.setPrice(saleCreateDto.price);
+        sale.setQuantity(saleCreateDto.quantity);
+        sale.setSaleTime(formatter.parse(saleCreateDto.saleTime));
+        sale = saleService.save(sale);
+
+        return saleCreateDto;
+    }
+
 }

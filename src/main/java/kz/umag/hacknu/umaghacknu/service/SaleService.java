@@ -1,7 +1,6 @@
 package kz.umag.hacknu.umaghacknu.service;
 
 import kz.umag.hacknu.umaghacknu.model.Sale;
-import kz.umag.hacknu.umaghacknu.model.Supply;
 import kz.umag.hacknu.umaghacknu.repo.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,7 @@ public class SaleService {
         return saleRepository.get(barcode, fromTime, toTime);
     }
 
-    public Sale create(Sale sale) {
+    public Sale save(Sale sale) {
         return saleRepository.save(sale);
     }
 }

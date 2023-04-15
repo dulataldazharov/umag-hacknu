@@ -12,7 +12,7 @@ public class Supply implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public Integer id;
+    public Long id;
     @Column(name = "barcode")
     public Long barcode;
 
@@ -25,11 +25,11 @@ public class Supply implements Serializable {
     @Column(name = "supply_time")
     public Date supplyTime;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

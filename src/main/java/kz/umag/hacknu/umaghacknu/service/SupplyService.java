@@ -18,7 +18,7 @@ public class SupplyService {
         return supplyRepository.get(barcode, fromTime, toTime);
     }
 
-    public Supply create(Supply supply) {
+    public Supply save(Supply supply) {
         return supplyRepository.save(supply);
     }
 }
