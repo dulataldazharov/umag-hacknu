@@ -23,7 +23,7 @@ public class SaleController {
     public SaleService saleService;
 
     @GetMapping(path = "api/sales")
-    public @ResponseBody List<Sale> test(
+    public @ResponseBody List<Sale> get(
             @RequestParam(name = "barcode", required = false) String barcodeStr,
             @RequestParam(name = "fromTime", required = false) String fromTimeStr,
             @RequestParam(name = "toTime", required = false) String toTimeStr) throws ParseException {
