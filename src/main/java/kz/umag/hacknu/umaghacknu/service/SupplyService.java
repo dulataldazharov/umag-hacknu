@@ -17,4 +17,8 @@ public class SupplyService {
     public List<Supply> get(Long barcode, Date fromTime, Date toTime) {
         return supplyRepository.get(barcode, fromTime, toTime);
     }
+
+    public Supply create(Supply supply) {
+        return supplyRepository.save(supply);
+    }
 }
