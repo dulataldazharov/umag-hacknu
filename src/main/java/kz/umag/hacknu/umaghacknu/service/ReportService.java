@@ -73,11 +73,11 @@ public class ReportService {
             firstSaleSupply.prefixMargin = 0L;
             firstSaleSupply.prefixRevenue = 0L;
             firstSaleSupply.prefixQuantity = 0;
-            supplies = supplyRepository.findAllOrderBySupplyTime();
+            supplies = supplyRepository.findAllByBarcodeOrderBySupplyTime(barcode);
         } else {
             firstSaleSupply = saleSupplyRepository.findBySaleId(firstSale.id);
             Supply firstSupply = supplyRepository.findById(firstSaleSupply.supplyId).get();
-            supplies = supplyRepository.findAllFromTime(firstSupply.supplyTime);
+            supplies = supplyRepository.findAllFromTime(barcode, firstSupply.supplyTime);
         }
         int seq = firstSaleSupply.supplySeq;
         int i = 0;

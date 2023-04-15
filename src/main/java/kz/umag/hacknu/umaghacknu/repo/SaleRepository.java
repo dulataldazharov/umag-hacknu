@@ -1,6 +1,7 @@
 package kz.umag.hacknu.umaghacknu.repo;
 
 import kz.umag.hacknu.umaghacknu.model.Sale;
+import kz.umag.hacknu.umaghacknu.model.SaleSupply;
 import kz.umag.hacknu.umaghacknu.model.Supply;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,4 +17,12 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
             "   ?2 <= s.sale_time AND ?3 >= s.sale_time",
             nativeQuery = true)
     List<Sale> get(Long barcode, Date fromTime, Date toTime);
+
+    @Query(nativeQuery = true, value = "SELECT s FROM Sale s WHERE s.barcode = ?1 AND s.saleTime >= ?2 ORDER BY s.saleTime")
+    List<Sale> findAllFromTime(Long barcode, Date fromTime);
+
+    @Query(nativeQuery = true, value = "SELECT s FROM Sale s WHERE s.barcode = ?1 AND s.saleTime < ?2 ORDER BY s.saleTime DESC LIMIT 1")
+    Sale getFirstBefore(Long barcode, Date fromTime);
+
+
 }
