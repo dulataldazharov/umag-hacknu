@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public interface SaleRepository extends JpaRepository<Sale, Integer> {
+public interface SaleRepository extends JpaRepository<Sale, Long> {
     @Query(value = "SELECT * FROM SALE s " +
             "WHERE (?1 IS NULL OR s.barcode = ?1) AND " +
             "   ?2 <= s.sale_time AND ?3 >= s.sale_time",

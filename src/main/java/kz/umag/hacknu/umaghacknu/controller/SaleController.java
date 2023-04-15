@@ -6,6 +6,7 @@ import kz.umag.hacknu.umaghacknu.dto.SupplyCreateDto;
 import kz.umag.hacknu.umaghacknu.model.Sale;
 import kz.umag.hacknu.umaghacknu.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,6 +63,12 @@ public class SaleController {
         sale = saleService.save(sale);
 
         return saleCreateDto;
+    }
+
+    @DeleteMapping(path = "api/sales/{id}")
+    public ResponseEntity delete(@PathVariable Long id) {
+        saleService.delete(id);
+        return ResponseEntity.ok().build();
     }
 
 }

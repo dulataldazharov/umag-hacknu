@@ -6,6 +6,7 @@ import kz.umag.hacknu.umaghacknu.model.Supply;
 import kz.umag.hacknu.umaghacknu.service.SupplyService;
 import kz.umag.hacknu.umaghacknu.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,5 +66,11 @@ public class SupplyController {
         supply = supplyService.save(supply);
 
         return supplyCreateDto;
+    }
+
+    @DeleteMapping(path = "api/supplies/{id}")
+    public ResponseEntity delete(@PathVariable Long id) {
+        supplyService.delete(id);
+        return ResponseEntity.ok().build();
     }
 }

@@ -21,4 +21,8 @@ public class SupplyService {
     public Supply save(Supply supply) {
         return supplyRepository.save(supply);
     }
+
+    public void delete(Long id) {
+        supplyRepository.deleteById(id);
+    }
 }

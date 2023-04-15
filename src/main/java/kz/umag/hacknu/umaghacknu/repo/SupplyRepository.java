@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public interface SupplyRepository extends JpaRepository<Supply, Integer> {
+public interface SupplyRepository extends JpaRepository<Supply, Long> {
     @Query(value = "SELECT * FROM SUPPLY s " +
             "WHERE (?1 IS NULL OR s.barcode = ?1) AND " +
             "   ?2 <= s.supply_time AND ?3 >= s.supply_time",

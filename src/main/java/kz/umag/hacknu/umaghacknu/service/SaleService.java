@@ -21,4 +21,8 @@ public class SaleService {
     public Sale save(Sale sale) {
         return saleRepository.save(sale);
     }
+
+    public void delete(Long id) {
+        saleRepository.deleteById(id);
+    }
 }
