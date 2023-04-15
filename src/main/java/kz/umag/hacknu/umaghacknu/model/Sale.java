@@ -14,7 +14,7 @@ public class Sale {
     public Integer id;
 
     @Column(name = "barcode")
-    public String barcode;
+    public Integer barcode;
 
     @Column(name = "price")
     public Integer price;
