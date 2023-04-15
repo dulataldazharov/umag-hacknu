@@ -24,16 +24,4 @@ public class Sale {
 
     @Column(name = "sale_time")
     public Date saleTime;
-
-    @Column(name = "supply_id")
-    public Integer supplyId;
-
-    @Column(name = "supply_seq")
-    public Integer supplySeq;
-
-    @Column(name = "margin")
-    public Integer margin;
-
-    @Column(name = "prefix_margin")
-    public Integer prefixMargin;
 }
