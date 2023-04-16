@@ -10,3 +10,6 @@ create table sale_supply
     prefix_revenue bigint,
     sale_time    datetime null
 );
+
+create index sale_supply_barcode_time_idx
+    on sale_supply (barcode, sale_time);
