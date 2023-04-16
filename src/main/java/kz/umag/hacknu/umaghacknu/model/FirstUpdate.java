@@ -8,6 +8,14 @@ import java.util.Date;
 @Table(name = "first_update")
 public class FirstUpdate {
 
+    public FirstUpdate() {
+
+    }
+    public FirstUpdate(Long barcode, Date time) {
+        this.barcode = barcode;
+        this.time = time;
+    }
+
     @Id
     @Column(name = "barcode")
     public Long barcode;

@@ -51,7 +51,7 @@ public class ReportService {
         return result;
     }
 
-    private void rebuild(FirstUpdate update) {
+    public void rebuild(FirstUpdate update) {
         Long barcode = update.barcode;
         Date fromTime = update.time;
         firstUpdateRepository.delete(update);
