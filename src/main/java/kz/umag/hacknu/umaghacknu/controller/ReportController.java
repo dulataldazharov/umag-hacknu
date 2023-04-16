@@ -25,9 +25,15 @@ public class ReportController {
             @RequestParam(name = "barcode") String barcodeStr,
             @RequestParam(name = "fromTime") String fromTimeStr,
             @RequestParam(name = "toTime") String toTimeStr) throws ParseException {
+        long start = System.currentTimeMillis();
         Long barcode = barcodeStr == null ? null : Long.parseLong(barcodeStr);
         Date fromTime = fromTimeStr == null ? new Date(0L) : formatter.parse(fromTimeStr);
         Date toTime = toTimeStr == null ? new Date() : formatter.parse(toTimeStr);
-        return reportService.getReport(barcode, fromTime, toTime);
+        Report report = reportService.getReport(barcode, fromTime, toTime);
+
+        System.out.println("Barcode: " + barcodeStr + ", Quantity: " + report.quantity
+                + ", Report time: " + (System.currentTimeMillis()-start));
+
+        return report;
     }
 }

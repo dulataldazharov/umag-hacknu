@@ -35,7 +35,7 @@ public class ReportService {
     public Report getReport(Long barcode, Date fromTime, Date toTime) {
         FirstUpdate update = firstUpdateRepository.findByBarcode(barcode);
         if (!Objects.isNull(update)) {
-            rebuild(barcode, update.time);
+            rebuild(update);
         }
         SaleSupply lastSaleSupply = saleSupplyRepository.getLast(barcode, toTime);
         if (Objects.isNull(lastSaleSupply) || lastSaleSupply.saleTime.compareTo(fromTime) < 0L) {
@@ -51,7 +51,10 @@ public class ReportService {
         return result;
     }
 
-    private void rebuild(Long barcode, Date fromTime) {
+    private void rebuild(FirstUpdate update) {
+        Long barcode = update.barcode;
+        Date fromTime = update.time;
+        firstUpdateRepository.delete(update);
         saleSupplyRepository.deleteAllFromTime(barcode, fromTime);
         List<Sale> sales = saleRepository.findAllFromTime(barcode, fromTime);
         if (sales.isEmpty()) {
@@ -76,8 +79,13 @@ public class ReportService {
             supplies = supplyRepository.findAllByBarcodeOrderBySupplyTime(barcode);
         } else {
             firstSaleSupply = saleSupplyRepository.findBySaleId(firstSale.id);
-            Supply firstSupply = supplyRepository.findById(firstSaleSupply.supplyId).get();
-            supplies = supplyRepository.findAllFromTime(barcode, firstSupply.supplyTime);
+            if (firstSaleSupply.supplyId != null) {
+                Supply firstSupply = supplyRepository.findById(firstSaleSupply.supplyId).get();
+                supplies = supplyRepository.findAllFromTime(barcode, firstSupply.supplyTime);
+            }
+            else {
+                supplies = supplyRepository.findAllByBarcodeOrderBySupplyTime(barcode);
+            }
         }
         int seq = firstSaleSupply.supplySeq;
         int i = 0;
@@ -100,13 +108,24 @@ public class ReportService {
         List<SaleSupply> saleSupplies = new ArrayList<>();
 
         for (Sale sale : sales) {
-            // TODO: consider no match
             SaleSupply saleSupply = new SaleSupply();
             saleSupply.barcode = barcode;
             saleSupply.saleId = sale.id;
             saleSupply.saleTime = sale.saleTime;
-            saleSupply.supplyId = supplies.get(i).id;
-            saleSupply.supplySeq = seq;
+            if (i == supplies.size()) {
+                if (supplies.size() > 0) {
+                    saleSupply.supplyId = supplies.get(i - 1).id;
+                    saleSupply.supplySeq = supplies.get(i - 1).quantity;
+                }
+                else {
+                    saleSupply.supplyId = null;
+                    saleSupply.supplySeq = 0;
+                }
+            }
+            else {
+                saleSupply.supplyId = supplies.get(i).id;
+                saleSupply.supplySeq = seq;
+            }
             saleSupply.prefixQuantity = firstSaleSupply.prefixQuantity + sale.quantity;
             saleSupply.prefixRevenue = firstSaleSupply.prefixRevenue + (long) sale.price * sale.quantity;
 
